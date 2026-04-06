@@ -49,7 +49,14 @@ export default function DashboardPage() {
       setUser({ email: user.email || '' })
 
       // Ensure settings exist
-      await fetch('/api/auth/ensure-profile', { method: 'POST' })
+      const { data: existingSettings } = await supabase
+        .from('ar_settings')
+        .select('id')
+        .eq('user_id', user.id)
+        .single()
+      if (!existingSettings) {
+        await supabase.from('ar_settings').insert({ user_id: user.id })
+      }
 
       // Fetch recent calls
       const { data } = await supabase
