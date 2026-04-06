@@ -23,6 +23,11 @@ export const metadata: Metadata = {
     url: "https://aireceptionist.eazyweb.nc",
     siteName: "AIReceptionist",
     type: "website",
+    locale: "en_US",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
